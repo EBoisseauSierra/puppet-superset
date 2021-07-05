@@ -1,9 +1,15 @@
 # =Class superset::package
 class superset::package inherits superset {
-  $deps = [
-    'gcc', 'gcc-c++', 'libffi-devel', 'chromium', 'chromedriver', 'git',
-    'openssl-devel', 'cyrus-sasl-devel', 'openldap-devel'
-  ]
+  if downcase($::osfamily) == 'RedHat'{
+    $deps = [
+      'gcc', 'gcc-c++', 'libffi-devel', 'chromium', 'chromedriver', 'git',
+      'openssl-devel', 'cyrus-sasl-devel', 'openldap-devel'
+    ]
+  } elsif downcase($::osfamily) == 'Debian'{
+    $deps = [
+      'chromium-browser', 'git', 'libssl-dev', 'libsasl2-dev', 'ldap-utils', 'python-ldap',
+    ]
+  }
 
   package { $deps:
     ensure => present
