@@ -25,9 +25,15 @@ class superset::python inherits superset {
     require  => [Class['python'], File[$base_dir]],
   }
 
-  $deps = [
-    'eventlet', 'gevent', 'greenlet', 'gsheetsdb', 'gunicorn', 'pyldap', 'sqlalchemy'
-  ]
+  if downcase($::osfamily) == 'Debian'{
+    $deps = [
+      'eventlet', 'gevent', 'greenlet', 'gsheetsdb', 'gunicorn', 'sqlalchemy'
+    ]
+  } else {
+    $deps = [
+      'eventlet', 'gevent', 'greenlet', 'gsheetsdb', 'gunicorn', 'pyldap', 'sqlalchemy'
+    ]
+  }
 
   python::pip { 'pystan':
     ensure       => '2.19.1.1',
