@@ -13,10 +13,14 @@ class superset::db inherits superset {
     }
 
     if defined('pgdump::dump') {
+      file{"/var/lib/pgsql/dump":
+          ensure  =>  directory,
+      }
+
       class { 'pgdump::dump':
         db_name     => $db_name,
         db_dump_dir => '/var/lib/pgsql/dump',
-        require     => Postgresql::Server::Db[$db_name]
+        require     => [File["/var/lib/pgsql/dump"], Postgresql::Server::Db[$db_name]]
       }
     }
   }
