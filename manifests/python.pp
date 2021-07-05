@@ -1,7 +1,9 @@
 # =Class superset::python
 class superset::python inherits superset {
-  require superset::selinux
   require superset::package
+  if downcase($::osfamily) == 'RedHat'{
+    require superset::selinux
+  }
 
   class { 'python':
     pip => present,
