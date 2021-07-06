@@ -11,7 +11,7 @@ class superset::package inherits superset {
       'gcc-c++',
       'gcc',
       'libffi-devel',
-      'openldap-devel'
+      'openldap-devel',
       'openssl-devel',
     ]
   } elsif downcase($::osfamily) == 'Debian'{
