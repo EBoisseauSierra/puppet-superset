@@ -27,7 +27,7 @@ class superset::python inherits superset {
 
   if downcase($::osfamily) == 'Debian'{
     $deps = [
-      'eventlet', 'gevent', 'greenlet', 'gsheetsdb', 'gunicorn', 'sqlalchemy'
+      'eventlet', 'gevent', 'greenlet', 'gsheetsdb', 'gunicorn', 'sqlalchemy', 'python-ldap'
     ]
   } else {
     $deps = [
